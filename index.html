@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Mocha — The Complete Toy Poodle Training Regime (Noob Dad Edition)</title>
+<style>
+:root{--bg:#fdf8f3;--ink:#2b1d12;--accent:#7a4a2b;--accent2:#c98a5b;--card:#fff;--muted:#6b5b4d;--ok:#2e7d4f;--warn:#b8531a;--bad:#b00020;--line:#e9dccb}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,Segoe UI,Inter,Helvetica,Arial,sans-serif;line-height:1.65}
+a{color:var(--accent)}
+header{background:linear-gradient(135deg,#7a4a2b,#c98a5b);color:#fff;padding:46px 24px;text-align:center}
+header h1{margin:0;font-size:2.2rem}
+header p{margin:8px 0 0;opacity:.95}
+.layout{display:grid;grid-template-columns:270px 1fr;max-width:1240px;margin:0 auto;gap:24px;padding:24px}
+nav.toc{position:sticky;top:16px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;max-height:calc(100vh - 32px);overflow:auto}
+nav.toc h3{margin:0 0 10px;font-size:.8rem;text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
+nav.toc a{display:block;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:.9rem}
+nav.toc a:hover{background:#f3e7d6}
+main{min-width:0}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:20px;scroll-margin-top:16px}
+section h2{margin-top:0;color:var(--accent);border-bottom:2px solid var(--line);padding-bottom:8px}
+section h3{color:var(--accent);margin-top:24px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.93rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f7eedd}
+.callout{background:#fff4e3;border-left:4px solid var(--accent2);padding:12px 16px;border-radius:8px;margin:14px 0}
+.callout.danger{background:#fbe3e7;border-left-color:var(--bad)}
+.callout.ok{background:#e6f3ec;border-left-color:var(--ok)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:#fbf3e6;border:1px solid var(--line);border-radius:10px;padding:14px}
+.step{display:flex;gap:14px;margin:14px 0;align-items:flex-start}
+.step .num{flex:0 0 36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.step .body{flex:1}
+img.illu{width:100%;border-radius:10px;border:1px solid var(--line);margin:10px 0;display:block}
+.figure{margin:14px 0}
+.figure figcaption{font-size:.85rem;color:var(--muted);text-align:center;margin-top:4px}
+details{background:#fbf3e6;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0}
+details summary{cursor:pointer;font-weight:600;color:var(--accent)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;margin-right:6px;background:#f3e7d6;color:var(--accent)}
+.kbd{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-family:monospace;font-size:.85rem}
+ul.checklist{padding-left:0}
+ul.checklist li{list-style:none;position:relative;padding-left:28px;margin:6px 0}
+ul.checklist li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border:2px solid var(--accent);border-radius:4px;background:#fff}
+.diagram{background:#fff;border:1px dashed var(--accent2);border-radius:10px;padding:14px;font-family:monospace;white-space:pre;overflow-x:auto;font-size:.85rem;color:var(--accent)}
+@media (max-width:880px){.layout{grid-template-columns:1fr}nav.toc{position:static;max-height:none}.grid2{grid-template-columns:1fr}}
+footer{text-align:center;color:var(--muted);padding:30px;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+<h1>🎓 Mocha — The Complete Training Regime</h1>
+<p>From "tiny scared puppy" to "best behaved doggo on the block" · Step-by-step for first-time dads</p>
+</header>
+
+<div class="layout">
+<nav class="toc">
+<h3>Training map</h3>
+<a href="#philosophy">0. Training Philosophy</a>
+<a href="#tools">1. Tools &amp; Treats</a>
+<a href="#rules">2. The 10 Universal Rules</a>
+<a href="#marker">3. The Marker (Yes!) System</a>
+<a href="#schedule">4. Daily Schedule</a>
+<a href="#timeline">5. Week-by-Week Timeline</a>
+<a href="#name">6. Name Recognition</a>
+<a href="#sit">7. Sit</a>
+<a href="#look">8. Look at Me / Watch</a>
+<a href="#come">9. Recall (Come)</a>
+<a href="#down">10. Down</a>
+<a href="#stay">11. Stay</a>
+<a href="#leaveit">12. Leave It</a>
+<a href="#dropit">13. Drop It</a>
+<a href="#wait">14. Wait at Door</a>
+<a href="#place">15. Place / Settle</a>
+<a href="#heel">16. Loose Leash &amp; Heel</a>
+<a href="#quiet">17. Quiet / No Bark</a>
+<a href="#crate">18. Crate Training</a>
+<a href="#potty">19. Potty Training</a>
+<a href="#bite">20. Bite Inhibition</a>
+<a href="#handling">21. Handling &amp; Grooming</a>
+<a href="#alone">22. Alone-Time Training</a>
+<a href="#tricks">23. Fun Tricks</a>
+<a href="#troubleshoot">24. Troubleshooting</a>
+<a href="#pitfalls">25. Common Mistakes</a>
+<a href="#log">26. Training Log Template</a>
+</nav>
+
+<main>
+
+<section id="philosophy">
+<h2>0. Training Philosophy — Read This First</h2>
+<img class="illu" alt="Toy poodle puppy" src="https://images.unsplash.com/photo-1591946614720-90a587da4a36?w=900"/>
+<p>You are not "training a dog". You are <strong>building a relationship</strong> with a tiny intelligent animal who wants two things: to feel safe, and to make you happy. Every interaction teaches him something — whether you meant to or not.</p>
+<p>Toy poodles are ranked the <strong>#2 smartest breed in the world</strong>. That cuts both ways: he will learn "sit" in 5 reps, but he will also learn "if I bark Dad gives me attention" in 2 reps. So be intentional.</p>
+<div class="callout"><strong>The one-line rule:</strong> Reward what you want. Ignore or prevent what you don't. Never punish.</div>
+<p>Modern dog training is built on one science: <strong>positive reinforcement</strong>. Behaviors that get rewarded get repeated. That's it. The old "alpha / dominance / pack leader" stuff has been debunked for 20+ years and it shuts down sensitive breeds like poodles for life. Forget it forever.</p>
+</section>
+
+<section id="tools">
+<h2>1. Your Training Toolkit</h2>
+<div class="grid2">
+<div class="card">
+<h3 style="margin-top:0">Treats — your currency</h3>
+<p>Treats are paychecks. Tiny, soft, smelly, swallowed in &lt;1 second (no chewing — kills the training rhythm).</p>
+<ul>
+<li><strong>Tier 1 (everyday):</strong> his regular kibble — use for easy stuff at home</li>
+<li><strong>Tier 2 (medium):</strong> JerHigh sticks broken into pea-sized bits, Pedigree puppy treats</li>
+<li><strong>Tier 3 (jackpot):</strong> boiled chicken, boiled paneer, tiny bits of cheese — for hard stuff (recall, vet, distractions)</li>
+</ul>
+<p><strong>Size:</strong> pea-sized. He weighs 1 kg. Anything bigger fills him up in 5 reps.</p>
+<p><strong>Daily treat budget:</strong> max 10% of his food calories. Subtract treats from his meal portions so he doesn't get fat.</p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Gear</h3>
+<ul>
+<li>Treat pouch (clip-on, opens fast) — game changer</li>
+<li>Soft H-harness (NEVER attach leash to a neck collar)</li>
+<li>1.2 m flat leash — no retractables</li>
+<li>Clicker (optional) or just your voice marker "Yes!"</li>
+<li>Lick mat (for grooming &amp; bath training)</li>
+<li>Snuffle mat / Kong Puppy / lick toys (mental tiring)</li>
+<li>Pee pads + enzymatic cleaner (Drools / Nature's Miracle)</li>
+<li>Bait bag of his kibble — leave one in every room</li>
+</ul>
+</div>
+</div>
+<figure class="figure">
+<img class="illu" alt="Treat pouch and harness" src="https://images.unsplash.com/photo-1583511666372-62fc211f8377?w=900"/>
+<figcaption>Treat pouch on your hip + soft harness = 80% of training success.</figcaption>
+</figure>
+</section>
+
+<section id="rules">
+<h2>2. The 10 Universal Training Rules</h2>
+<ol>
+<li><strong>Short, often, fun.</strong> 2–5 minute sessions, 3–5 times a day. Stop while he still wants more.</li>
+<li><strong>One word, one meaning.</strong> Pick "sit" or "baith" — never both. Same word, same tone, every time.</li>
+<li><strong>Reward within 1 second.</strong> After 2 seconds he doesn't connect treat to behavior.</li>
+<li><strong>Lure → Reward → Cue.</strong> First lure with a treat, then add the word, then fade the lure.</li>
+<li><strong>End on a win.</strong> Always finish with something he nails, then a jackpot treat.</li>
+<li><strong>Train hungry, not starving.</strong> Train before meals, not after.</li>
+<li><strong>Train calm, not tired.</strong> Overtired puppies = nipping &amp; tantrums. Stop and nap.</li>
+<li><strong>Generalise.</strong> A "sit" learned in your kitchen is NOT a "sit" in the lift lobby. Practice everywhere.</li>
+<li><strong>Never punish a recall.</strong> If he comes when called, it's always good. Never call him to do something he hates.</li>
+<li><strong>Be boring when he's wrong, exciting when he's right.</strong> No drama for mistakes. Big party for wins.</li>
+</ol>
+</section>
+
+<section id="marker">
+<h2>3. The Marker System ("Yes!")</h2>
+<p>A marker is a sound that means "<em>that exact thing you just did earned you a treat</em>". It's how you tell him precisely which behaviour you liked, even before the treat reaches his mouth.</p>
+<p>Choose ONE marker word. I recommend a crisp, happy <strong>"YES!"</strong> Use it for every reward, forever.</p>
+<h3>Charging the marker (Day 1 — 5 minutes)</h3>
+<div class="step"><div class="num">1</div><div class="body">Sit on the floor with 20 pea-sized treats.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Say <strong>"Yes!"</strong> → immediately give a treat. He doesn't have to do anything.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Wait 3–5 sec. Repeat. 20 times.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Test: when he's looking away, say "Yes!" If his head whips around expecting food — it's charged. Done.</div></div>
+<p>From now on, "Yes!" = a treat is coming. Never say "Yes!" without delivering the treat, or you'll devalue it.</p>
+</section>
+
+<section id="schedule">
+<h2>4. A Day in the Life — Sample Schedule</h2>
+<p>Toy puppies need a predictable rhythm. Routine = security = calm dog. Adapt these times to your day.</p>
+<div class="diagram">
+06:30  Wake up → potty (carry to pad) → "Yes!" + treat
+06:45  Breakfast (in his bowl OR hand-fed for bonding/training)
+07:00  Potty
+07:05  Training session #1 (3 min) — name, sit, look
+07:10  Free play / chew toy
+07:30  NAP (1.5–2 hr)
+09:30  Wake → potty → small training (1 min recall game)
+10:00  Calm time / lick mat / snuffle mat
+10:30  NAP
+12:30  Potty → lunch → potty
+12:45  Training session #2 (4 min) — sit, down, name
+13:00  Socialisation (carry him out of the house, let him see the world)
+13:30  NAP
+15:30  Potty → snack/training treats → handling practice (paws, ears, mouth)
+16:00  NAP
+17:30  Potty → free play with you on the floor
+18:00  Training session #3 (4 min) — review + 1 new thing
+18:15  Calm chew time
+19:00  Dinner → potty
+19:30  Family cuddle / TV time (in pen, on his bed)
+20:30  Last training (2 min easy wins, end happy)
+21:00  Last potty
+21:15  Wind-down — dim lights, soft voice
+21:30  Crate / sleep
+00:30  Potty break (week 1–3 only)
+03:30  Potty break (week 1–2 only)
+</div>
+<div class="callout">By week 4–6, drop the night potty breaks one at a time. By month 4, he should sleep through the night.</div>
+</section>
+
+<section id="timeline">
+<h2>5. The Week-by-Week Training Timeline</h2>
+<table>
+<tr><th>Week</th><th>Age</th><th>Focus</th><th>Add this</th></tr>
+<tr><td>1</td><td>8–9 wk</td><td>Settle in. Bonding. Marker charging. Pee pad.</td><td>Name, "Yes!", crate intro</td></tr>
+<tr><td>2</td><td>9–10 wk</td><td>Routine, hand feeding, gentle handling</td><td>Sit, look at me</td></tr>
+<tr><td>3</td><td>10–11 wk</td><td>Crate naps, baby recall games inside</td><td>Come (indoors), touch (nose to hand)</td></tr>
+<tr><td>4</td><td>11–12 wk</td><td>Down, brush intro, vet "happy visit"</td><td>Down, drop it (toy trade)</td></tr>
+<tr><td>5</td><td>12–13 wk</td><td>3-second stays, leave-it on floor</td><td>Stay (3s), leave it</td></tr>
+<tr><td>6</td><td>13–14 wk</td><td>Wait at door, longer crate alone time</td><td>Wait, settle on mat</td></tr>
+<tr><td>7</td><td>14–15 wk</td><td>Final vaccine done — start outdoor leash work in quiet area</td><td>Loose leash basics</td></tr>
+<tr><td>8</td><td>15–16 wk</td><td>First real walks, recall in garden</td><td>Heel start, quiet cue</td></tr>
+<tr><td>9–12</td><td>4–5 mo</td><td>Generalise everything outdoors with distractions</td><td>10s stay, 2m recall, paw, spin</td></tr>
+<tr><td>13–20</td><td>5–6 mo</td><td>Adolescent — he'll "forget" things. Stay patient. Re-drill basics.</td><td>Place, off, go to bed</td></tr>
+<tr><td>21–52</td><td>6–12 mo</td><td>Polish + tricks + maybe puppy class</td><td>Tricks, off-leash recall in safe area</td></tr>
+</table>
+</section>
+
+<section id="name">
+<h2>6. Lesson 1 — Name Recognition</h2>
+<p><span class="pill">Week 1</span> The single most important thing you'll teach him. His name = "look at me, good things happen".</p>
+<h3>How</h3>
+<div class="step"><div class="num">1</div><div class="body">Sit 1 m from him with 20 treats.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Say <strong>"Mocha!"</strong> in a happy voice — ONCE.</div></div>
+<div class="step"><div class="num">3</div><div class="body">The instant his eyes flick to you → "Yes!" → treat.</div></div>
+<div class="step"><div class="num">4</div><div class="body">If he doesn't look in 2 seconds, make a small kissy noise to get his attention, then "Yes!" → treat. Don't repeat his name.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Repeat 10 times. Stop. Do another set 1 hour later.</div></div>
+<h3>Watch out</h3>
+<ul>
+<li>NEVER use his name when angry. "MOCHA NO!" poisons the name forever.</li>
+<li>NEVER repeat the name 5 times. He learns to ignore it. Say it ONCE.</li>
+<li>Don't use his name + "come" in week 1. Just the name.</li>
+</ul>
+</section>
+
+<section id="sit">
+<h2>7. Lesson 2 — Sit</h2>
+<p><span class="pill">Week 2</span> The first "trick". 3 minutes a day, learned in 2–4 days.</p>
+<img class="illu" alt="Puppy sitting" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=900"/>
+<h3>How — the lure method</h3>
+<div class="step"><div class="num">1</div><div class="body">Hold a treat between your thumb and finger, right at his nose.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Slowly move the treat <strong>up and slightly back over his head</strong>.</div></div>
+<div class="step"><div class="num">3</div><div class="body">His nose follows up → his bum drops down. The instant his bum touches the floor → <strong>"Yes!"</strong> → treat right at his nose (not above, or he'll stand again).</div></div>
+<div class="step"><div class="num">4</div><div class="body">Repeat 5 times. If he gets it, do 5 more.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Day 2: same lure, but now say <strong>"Sit"</strong> right as his bum starts dropping.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Day 3: lure with an empty hand (same motion). Say "Sit". Bum drops → "Yes!" → treat from your other hand.</div></div>
+<div class="step"><div class="num">7</div><div class="body">Day 4: just say "Sit" with a tiny hand cue. Reward. The lure is faded.</div></div>
+<h3>Common bugs</h3>
+<ul>
+<li>Treat too high → he jumps. Lower it.</li>
+<li>Treat too far back → he walks backward. Closer to nose.</li>
+<li>You said "sit" three times → he learned "sit-sit-sit" means sit. Always one word.</li>
+</ul>
+</section>
+
+<section id="look">
+<h2>8. Lesson 3 — "Look at Me" / Watch</h2>
+<p><span class="pill">Week 2</span> The cure for distraction. Whenever he's losing focus, "look" brings him back.</p>
+<h3>How</h3>
+<div class="step"><div class="num">1</div><div class="body">Hold a treat at his nose. Slowly raise it to your chin/eye.</div></div>
+<div class="step"><div class="num">2</div><div class="body">His eyes follow → meets yours → "Yes!" → treat.</div></div>
+<div class="step"><div class="num">3</div><div class="body">After 5 reps, add the cue "Look" or "Watch me" right before raising the treat.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Build duration: 1 sec eye contact → 2 sec → 3 sec before marking.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Practice in noisy rooms, then outside. This is your emergency focus button.</div></div>
+</section>
+
+<section id="come">
+<h2>9. Lesson 4 — Recall (Come)</h2>
+<p><span class="pill">Week 3</span> The most important command of his life. A reliable recall can literally save him from a car or a snake.</p>
+<img class="illu" alt="Puppy running to owner" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900"/>
+<h3>The Recall Game (indoors only at first)</h3>
+<div class="step"><div class="num">1</div><div class="body">Two people, opposite ends of a small room. 10 treats each.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Person A squats, opens arms, in a happy excited voice: <strong>"Mocha, come!"</strong></div></div>
+<div class="step"><div class="num">3</div><div class="body">The instant he turns and starts moving → cheer "yes yes yes!" → he runs to you → 3 treats in a row + cuddle party.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Person B repeats from their end. Back and forth, 5 rounds.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Stop while he's still excited.</div></div>
+<h3>Solo recall</h3>
+<p>Walk into another room → call him → "Yes!" + jackpot when he arrives. Random surprise recalls during the day = he learns coming to dad is always magic.</p>
+<h3>Sacred recall rules</h3>
+<ul>
+<li>NEVER call him for something bad — bath, nail trim, crate at end of fun. Go get him instead.</li>
+<li>NEVER repeat "come". If he ignores once, walk over, gently pick him up, and reset.</li>
+<li>Use a SPECIAL recall treat (boiled chicken) that only happens for recall. Nothing else.</li>
+<li>Outdoor recall: only on a long line (5 m) until rock solid. The world is too tempting.</li>
+</ul>
+</section>
+
+<section id="down">
+<h2>10. Lesson 5 — Down</h2>
+<p><span class="pill">Week 4</span></p>
+<h3>How</h3>
+<div class="step"><div class="num">1</div><div class="body">Start with him in a "Sit".</div></div>
+<div class="step"><div class="num">2</div><div class="body">Treat at nose → slowly lower it straight down to the floor between his front paws.</div></div>
+<div class="step"><div class="num">3</div><div class="body">As his head follows down, slowly drag the treat forward along the floor away from him.</div></div>
+<div class="step"><div class="num">4</div><div class="body">His elbows drop → belly touches → "Yes!" → treat on the floor.</div></div>
+<div class="step"><div class="num">5</div><div class="body">After 5 reps, add the cue "Down" as he lowers.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Fade the lure over 3–4 days into a flat-palm-down hand signal.</div></div>
+<p><strong>Tip:</strong> If he just bends his head, try it next to a low coffee table — he has to crawl under to follow the treat. Forces a down.</p>
+</section>
+
+<section id="stay">
+<h2>11. Lesson 6 — Stay</h2>
+<p><span class="pill">Week 5</span> Build in 3 dimensions: <strong>Duration</strong>, <strong>Distance</strong>, <strong>Distraction</strong> — but only ONE at a time.</p>
+<h3>How</h3>
+<div class="step"><div class="num">1</div><div class="body">Sit him. Say "Stay" + show flat palm out (like a stop sign).</div></div>
+<div class="step"><div class="num">2</div><div class="body">Wait 1 second. "Yes!" → treat → release word "OK!" or "free!"</div></div>
+<div class="step"><div class="num">3</div><div class="body">Build duration: 1s → 2s → 3s → 5s → 10s. Add a second only after 3 successes.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Once 10s is solid, reset to 1s but take a half step back. Build distance.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Once distance is solid, reset to 1s short distance and add a small distraction (drop a sock, clap softly).</div></div>
+<h3>Critical rule</h3>
+<p>Always go back TO him to reward — don't call him out of stay. The release word is the only thing that ends the stay. Otherwise he learns "stay = wait until you get bored and walk away".</p>
+</section>
+
+<section id="leaveit">
+<h2>12. Lesson 7 — Leave It</h2>
+<p><span class="pill">Week 5</span> The "don't eat that dead pigeon" command. Possibly life-saving in Mumbai streets.</p>
+<h3>How — the closed fist game</h3>
+<div class="step"><div class="num">1</div><div class="body">Put a treat in your closed fist. Show it to him. He'll lick, paw, nibble.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Say nothing. Wait. The instant he pulls his nose away — even 1 cm — "Yes!" → treat from your OTHER hand (never the fist treat).</div></div>
+<div class="step"><div class="num">3</div><div class="body">Repeat 10 times. He'll start backing off faster.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Now add the cue "Leave it" as you present the fist.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Level up: open palm with treat. If he goes for it, close the fist. Wait for the back-off. "Yes!" → treat from other hand.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Level up: treat on the floor under your shoe. Same game.</div></div>
+<div class="step"><div class="num">7</div><div class="body">Level up: treat on the floor uncovered. You stand ready to cover it. Same game.</div></div>
+<div class="step"><div class="num">8</div><div class="body">Final test: drop something on the walk → "Leave it!" → he looks at you → jackpot.</div></div>
+</section>
+
+<section id="dropit">
+<h2>13. Lesson 8 — Drop It</h2>
+<p><span class="pill">Week 4</span></p>
+<p>Different from "leave it". Drop = "spit out what's already in your mouth".</p>
+<div class="step"><div class="num">1</div><div class="body">Give him a low-value toy he likes.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Hold a high-value treat near his nose. He'll drop the toy to get the food.</div></div>
+<div class="step"><div class="num">3</div><div class="body">As the toy drops → "Yes!" → treat → return the toy.</div></div>
+<div class="step"><div class="num">4</div><div class="body">After 5 reps, add cue "Drop" right before the trade.</div></div>
+<div class="callout">Always trade for something <em>better</em>. If you snatch things away, he learns to guard and run. Trading builds trust.</div>
+</section>
+
+<section id="wait">
+<h2>14. Lesson 9 — Wait at Doors &amp; Bowls</h2>
+<p><span class="pill">Week 6</span> Door darting kills small dogs. This is the prevention.</p>
+<h3>Door wait</h3>
+<div class="step"><div class="num">1</div><div class="body">Stand at the door, hand on the knob. Say "Wait".</div></div>
+<div class="step"><div class="num">2</div><div class="body">Open the door 2 cm. If he moves forward → close it gently. No drama.</div></div>
+<div class="step"><div class="num">3</div><div class="body">If he holds → "Yes!" → treat → release "OK!" → walk through together.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Build to fully open door and you stepping through first.</div></div>
+<h3>Bowl wait</h3>
+<p>Hold his food bowl. Say "Wait". Lower it slowly. If he lunges, lift it back up. When he hesitates → "Yes!" → place bowl → "OK eat!". Within a week he'll auto-sit when he sees the bowl.</p>
+</section>
+
+<section id="place">
+<h2>15. Lesson 10 — Place / Settle on a Mat</h2>
+<p><span class="pill">Week 6</span> Calm-on-cue. Worth its weight in gold when you have guests, eat dinner, or work from home.</p>
+<div class="step"><div class="num">1</div><div class="body">Put a small mat or bed on the floor.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Toss a treat on it. He goes to investigate. The instant his paws are on the mat → "Yes!" → another treat ON the mat.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Wait. He'll wander off. Toss another treat on the mat. Repeat.</div></div>
+<div class="step"><div class="num">4</div><div class="body">After 10 reps, he'll volunteer onto the mat. NOW add the cue "Place" or "Bed".</div></div>
+<div class="step"><div class="num">5</div><div class="body">Build duration: when he lies down on his own → big jackpot. Slowly extend to 30s, 1 min, 5 min by tossing treats every X seconds.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Use during your dinner. He learns: dinner time = mat time = treats happen.</div></div>
+</section>
+
+<section id="heel">
+<h2>16. Lesson 11 — Loose Leash &amp; Heel</h2>
+<p><span class="pill">Week 7+</span> Only after final vaccinations. Until then, practice indoors with the leash &amp; harness on (no walking, just wearing).</p>
+<img class="illu" alt="Puppy on leash walk" src="https://images.unsplash.com/photo-1601758174039-c4b22a5e8e3a?w=900"/>
+<h3>The "be a tree" method</h3>
+<div class="step"><div class="num">1</div><div class="body">Put harness + leash on. Stand still. The instant the leash is loose (any slack) → "Yes!" → treat at your left thigh.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Take ONE step. Loose leash → "Yes!" → treat at thigh.</div></div>
+<div class="step"><div class="num">3</div><div class="body">If he pulls → STOP dead. Do not move forward. Wait until the leash goes loose (he turns, looks, steps back). The instant it's loose → "Yes!" → continue.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Pulling = walk stops. Loose = walk continues. He works it out in a week.</div></div>
+<h3>Heel position</h3>
+<p>Heel = walking right at your left side, watching you. Lure him into position with a treat at your thigh. Take 2 steps → "Yes!" → treat. Build to 5, 10, 20 steps.</p>
+</section>
+
+<section id="quiet">
+<h2>17. Lesson 12 — Quiet (No Bark)</h2>
+<p><span class="pill">Week 6+</span> Poodles bark. Lots. Don't try to make him never bark — teach him to STOP on cue.</p>
+<div class="step"><div class="num">1</div><div class="body">Wait for him to bark (doorbell, etc.). Let him bark 2–3 times.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Hold a treat at his nose. He has to stop barking to sniff it.</div></div>
+<div class="step"><div class="num">3</div><div class="body">The instant he's quiet for 1 second → say "Quiet" → "Yes!" → treat.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Build to 3s, 5s, 10s of silence.</div></div>
+<div class="callout">NEVER yell "QUIET!" at a barking dog. To him you're barking back — joining in. Stay calm.</div>
+</section>
+
+<section id="crate">
+<h2>18. Crate Training</h2>
+<img class="illu" alt="Crate" src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=900"/>
+<p><span class="pill">Week 1 onwards</span> Crate = his bedroom, his safe space, never punishment.</p>
+<div class="step"><div class="num">1</div><div class="body">Day 1: door open, blanket inside, toss treats in. Let him walk in &amp; out freely. Don't close the door.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Day 2: feed his meals just inside the crate, door open.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Day 3: feed meals fully inside. While he eats, close door for 5 seconds → open before he finishes.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Day 4: closed for 30 sec while you sit beside him, talking softly.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Day 5: closed for 2 min. Walk a few steps away. Come back, open.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Day 6: 5 min, you leave the room.</div></div>
+<div class="step"><div class="num">7</div><div class="body">Day 7+: 10 min, 20 min, with a frozen Kong of plain yogurt to chew.</div></div>
+<h3>Cue: "Crate" or "Bed"</h3>
+<p>Toss treat in → say "Crate" as he walks in → "Yes!" → second treat inside. After a week he'll go in on cue.</p>
+<h3>Crating rules</h3>
+<ul>
+<li>Never let him out while he's whining — wait for 3 sec of quiet, then open. Otherwise he learns whine = freedom.</li>
+<li>Tired puppy goes in crate. Wired puppy goes for play first.</li>
+<li>Cover 3 sides with cloth = den feeling.</li>
+<li>Max crate time: age in months + 1 = hours (3 months = 4 hrs max). Never more than 5 hrs ever.</li>
+</ul>
+</section>
+
+<section id="potty">
+<h2>19. Potty Training (the parallel mission)</h2>
+<p>This runs alongside everything else. Toy breeds take 4–6 months to be reliably house-trained — they have walnut-sized bladders.</p>
+<h3>The system</h3>
+<div class="step"><div class="num">1</div><div class="body">Confine him to a small area (pen) when you can't watch. Bigger space = more accidents.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Carry him to the pee pad: <strong>after every nap, after every meal, after every play burst, every 45–60 min otherwise</strong>.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Stand still. Boring. Don't talk. Wait up to 3 min.</div></div>
+<div class="step"><div class="num">4</div><div class="body">The instant he starts going, softly say a cue word — "Su-su" or "Potty". Same word every time.</div></div>
+<div class="step"><div class="num">5</div><div class="body">When he finishes → "YES! Good potty!" → treat → 30 sec play as bonus reward.</div></div>
+<div class="step"><div class="num">6</div><div class="body">If he has an accident off-pad: silently clean with enzymatic cleaner. NO scolding. Make a mental note: "I missed his cue".</div></div>
+<h3>Reading his cues</h3>
+<p>Sniffing the floor in circles = about to go. Whining at the pen door = about to go. Sudden stop in play = about to go. Carry him to the pad <em>now</em>.</p>
+<h3>Pad → outdoors</h3>
+<p>After full vaccination (~16 wk), slowly move the pad closer to the door, then outside the door, then carry him to the same spot in the garden. Use the same cue word. Same treat. Within 2–3 weeks he'll prefer outside.</p>
+</section>
+
+<section id="bite">
+<h2>20. Bite Inhibition</h2>
+<p>Puppy teeth feel like needles. Goal isn't "no biting ever" — it's "soft mouth, then no teeth on humans at all".</p>
+<div class="step"><div class="num">1</div><div class="body">When he bites you, give a sharp <strong>"OUCH!"</strong> in a high pitch (like a hurt puppy). Freeze. Be boring for 10 seconds.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Redirect to a chew toy. Praise him for chewing the toy.</div></div>
+<div class="step"><div class="num">3</div><div class="body">If he keeps biting, stand up and walk out of the pen for 30 seconds. Come back calm.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Repeat. He learns: teeth on skin = fun ends.</div></div>
+<h3>Never</h3>
+<ul>
+<li>Smack his nose</li>
+<li>Hold his mouth shut</li>
+<li>Wrestle / rough play with hands (teaches biting hands)</li>
+<li>Yank your hand back fast (looks like prey)</li>
+</ul>
+<p>Most puppies stop hard biting by 5 months. Be patient.</p>
+</section>
+
+<section id="handling">
+<h2>21. Handling &amp; Grooming Cooperation</h2>
+<p>Poodles get groomed for life. Train him to LOVE being touched everywhere. 1 minute a day.</p>
+<div class="step"><div class="num">1</div><div class="body">Touch his paw for 1 second → "Yes!" → treat. Repeat with each paw.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Touch his ear flap → "Yes!" → treat. Look inside → "Yes!" → treat.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Lift his lip, touch a tooth → "Yes!" → treat. Build to a finger toothbrush.</div></div>
+<div class="step"><div class="num">4</div><div class="body">Run brush through his coat one stroke → "Yes!" → treat.</div></div>
+<div class="step"><div class="num">5</div><div class="body">Touch nail clipper to a nail (don't clip yet) → "Yes!" → treat. Build to one tiny clip a day.</div></div>
+<div class="step"><div class="num">6</div><div class="body">Lick mat with peanut butter (xylitol-free!) stuck to bathroom wall = best bath training tool ever.</div></div>
+</section>
+
+<section id="alone">
+<h2>22. Alone-Time Training (preventing separation anxiety)</h2>
+<p>Toy poodles are velcro dogs. Without training, they can't be left alone without panicking. Start day 2.</p>
+<div class="step"><div class="num">1</div><div class="body">Step out of the room for 10 seconds. Come back. No fuss.</div></div>
+<div class="step"><div class="num">2</div><div class="body">Build to 30 sec, 1 min, 2 min, 5 min. Always come back BEFORE he panics.</div></div>
+<div class="step"><div class="num">3</div><div class="body">Add a "I'll be back" ritual: a specific phrase + a frozen Kong as you leave.</div></div>
+<div class="step"><div class="num">4</div><div class="body">When you return: ignore him for 30 sec. No big greeting (it teaches him your return is a huge dramatic thing = stress).</div></div>
+<div class="step"><div class="num">5</div><div class="body">Build to 10 min, 30 min, 1 hr, 2 hr alone. Use a camera to monitor.</div></div>
+<div class="callout">Goals by age: 8–10 wk = 30 min alone. 3 mo = 2 hr. 4 mo = 3 hr. 6 mo = 4 hr. Adult = 5 hr max.</div>
+</section>
+
+<section id="tricks">
+<h2>23. Fun Tricks (after the basics)</h2>
+<details><summary>Paw / Shake</summary>
+1. Sit. Hold a treat in your closed fist near the floor.<br>
+2. He paws at your fist to get it → "Yes!" → treat.<br>
+3. Add cue "Paw" → fade fist → just open palm.</details>
+<details><summary>Spin</summary>
+1. Treat at nose → slowly circle around his body.<br>
+2. He follows in a full circle → "Yes!" → treat.<br>
+3. Add cue "Spin". Fade lure to a finger circle.</details>
+<details><summary>High Five</summary>
+After "Paw" is solid: hold your hand higher and vertical. He raises paw to it → "Yes!" → treat. New cue "Five".</details>
+<details><summary>Roll Over</summary>
+From "Down": lure with treat from nose → over shoulder → he rolls. Reward generously, this is hard.</details>
+<details><summary>Bow</summary>
+Lure his nose down between his front paws while keeping his bum up. Capture the moment → "Yes!".</details>
+<details><summary>Touch (nose to hand)</summary>
+Present open palm. Curiosity makes him bump it with nose → "Yes!" → treat. Add cue "Touch". This is also a great recall substitute.</details>
+</section>
+
+<section id="troubleshoot">
+<h2>24. Troubleshooting</h2>
+<table>
+<tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr>
+<tr><td>Won't take treats outside</td><td>Too stressed / treats too boring</td><td>Use jackpot tier (chicken). Train in calmer spot.</td></tr>
+<tr><td>Sits inside, not outside</td><td>Not generalised yet</td><td>Restart from step 1 outside. Easier than you think.</td></tr>
+<tr><td>Pees the moment you turn your back</td><td>Too much freedom</td><td>Shrink the pen. Watch him 100% or pen him.</td></tr>
+<tr><td>Cries in crate</td><td>Too fast, or full bladder, or bored</td><td>Slow it down. Potty break first. Frozen Kong inside.</td></tr>
+<tr><td>Ignores recall</td><td>Recall has been "punished"</td><td>Reset. Only call him for amazing things for 2 weeks.</td></tr>
+<tr><td>Bites hands during play</td><td>Hands are toys to him</td><td>Always have a tug toy in your hand during play.</td></tr>
+<tr><td>Barks at every sound</td><td>Under-socialised</td><td>Sound desensitisation (YouTube playlist on low + treats).</td></tr>
+<tr><td>Adolescent "forgets" everything (5–7 mo)</td><td>Normal teen brain</td><td>Re-drill basics. Patience. It comes back.</td></tr>
+<tr><td>Won't focus &gt; 30 seconds</td><td>Too young / too tired</td><td>Shorter sessions. End on a win.</td></tr>
+</table>
+</section>
+
+<section id="pitfalls">
+<h2>25. Common First-Time Dad Mistakes</h2>
+<ul>
+<li>❌ Repeating cues 5 times — teaches him to ignore the first 4.</li>
+<li>❌ Long sessions — toy puppies have 2–5 minute attention spans.</li>
+<li>❌ Treats too big — fills him up in 3 reps.</li>
+<li>❌ Training right after meals — he's full and sleepy.</li>
+<li>❌ Calling him "come" then giving a bath — recall poisoned.</li>
+<li>❌ Punishing accidents — he learns to hide pee, not stop.</li>
+<li>❌ Letting kids drag him around — fear imprint.</li>
+<li>❌ Inconsistent words ("sit" today, "baith" tomorrow).</li>
+<li>❌ Asking too much too soon (10 sec stay on day 1).</li>
+<li>❌ Skipping socialisation because "he's not vaccinated yet" — carry him out, the world must come to him.</li>
+<li>❌ Comparing to Instagram puppies. Yours is normal.</li>
+<li>❌ Quitting when frustrated. Set him up to succeed and try again tomorrow.</li>
+</ul>
+</section>
+
+<section id="log">
+<h2>26. Training Log Template</h2>
+<p>Print this. Stick it on the fridge. Tick boxes daily. Pattern recognition = faster progress.</p>
+<table>
+<tr><th>Day</th><th>Sessions (3×)</th><th>New behaviour worked on</th><th>Wins</th><th>Struggles</th><th>Notes</th></tr>
+<tr><td>Mon</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Tue</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Wed</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Thu</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Fri</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Sat</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Sun</td><td>☐ ☐ ☐</td><td></td><td></td><td></td><td></td></tr>
+</table>
+<h3>The 30-day promise</h3>
+<p>Do 3 sessions × 3 minutes a day for 30 days. By day 30 Mocha will know: name, sit, down, come (indoors), look, leave it, drop it, his crate cue, place, and the start of stay. That's a better-trained dog than 80% of adults you'll meet on a Mumbai walk.</p>
+</section>
+
+<section>
+<h2>🐩 Final Word</h2>
+<p>You don't need to be a dog whisperer. You need to be <strong>consistent</strong>, <strong>kind</strong>, and <strong>quick with treats</strong>. Mocha will teach you as much as you teach him. Train little, train often, end on a win, breathe through the chaos. In a year you'll have a dog that follows you around like a shadow because he chose to — not because you forced him to.</p>
+<p style="text-align:center;font-size:2rem">🎓❤️🐾</p>
+</section>
+
+</main>
+</div>
+<footer>Built for Aman · April 2026 · Open in any browser. Print sections you use most.</footer>
+</body>
+</html>
